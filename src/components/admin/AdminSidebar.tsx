@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAppContext } from '../../context/AppContext.jsx';
+import { useAppContext } from '../../context/AppContext.tsx';
 
-const AdminSidebar = () => {
+const AdminSidebar: React.FC = () => {
     const { logout } = useAppContext();
     
     const handleLogout = () => {

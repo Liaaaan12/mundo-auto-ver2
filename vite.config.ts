@@ -4,10 +4,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    // Asegura que Vite maneje correctamente las extensiones TSX/TS/JSX/JS
     extensions: ['.js', '.jsx', '.ts', '.tsx'], 
   },
   server: {
-    // Si la pantalla blanca es por problemas de red o CORS en localhost
     open: true,
   },
 });

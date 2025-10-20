@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/common/Header.jsx';
-import Footer from '../../components/common/Footer.jsx';
-import { useAppContext } from '../../context/AppContext.jsx'; 
+import Header from '../../components/common/Header.tsx';
+import Footer from '../../components/common/Footer.tsx';
+import { useAppContext } from '../../context/AppContext.tsx'; 
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
     const { addToCart, products } = useAppContext();
     const featuredProducts = products.filter(p => ['motor-l200', 'frenos-suzuki', 'volante-momo'].includes(p.id));
 
-    const handleProductClick = (product) => {
+    const handleProductClick = (product: Product) => {
         if (window.confirm(`¿Desea agregar ${product.name} al carrito por $${product.price.toLocaleString('es-CL')} CLP?`)) {
             addToCart(product);
         }
@@ -46,7 +46,6 @@ const HomePage = () => {
                     <h2>Consejos de Mantenimiento</h2>
                     <p>Guías, tutoriales y consejos para el cuidado de tu vehículo.</p>
                     <div className="blog-grid">
-                        {/* Asumimos que las imágenes se cargan desde /public/imagenes */}
                         <div className="blog-post fade-in" style={{ animationDelay: '0.2s' }}>
                             <img src="/imagenes/liquido.jpg" alt="Revisión de fluidos" />
                             <h4>Revisión de niveles de fluidos esenciales</h4>

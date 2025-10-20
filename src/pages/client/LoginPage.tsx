@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Header from '../../components/common/Header.jsx'; 
-import Footer from '../../components/common/Footer.jsx';
-import { useAppContext } from '../../context/AppContext.jsx';
+import Header from '../../components/common/Header.tsx'; 
+import Footer from '../../components/common/Footer.tsx';
+import { useAppContext } from '../../context/AppContext.tsx';
 
-const LoginPage = ({ isAdminLogin = false }) => {
+interface LoginPageProps {
+    isAdminLogin?: boolean;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ isAdminLogin = false }) => {
     const { login, register, user } = useAppContext();
     const navigate = useNavigate();
 
-    // Redirigir si ya está autenticado
     if (user) {
         navigate(user.role === 'admin' ? '/admin' : '/');
         return null;
     }
 
-    // Estado de formularios
     const [loginUsername, setLoginUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const [regUsername, setRegUsername] = useState('');
     const [regPassword, setRegPassword] = useState('');
     const [regAge, setRegAge] = useState('');
 
-    const handleLogin = (event) => {
+    const handleLogin = (event: React.FormEvent) => {
         event.preventDefault();
         const success = login(loginUsername, loginPassword, isAdminLogin);
         if (success) {
@@ -29,7 +31,7 @@ const LoginPage = ({ isAdminLogin = false }) => {
         }
     };
 
-    const handleRegister = (event) => {
+    const handleRegister = (event: React.FormEvent) => {
         event.preventDefault();
         const success = register(regUsername, regPassword, parseInt(regAge));
         if (success) {
@@ -37,7 +39,7 @@ const LoginPage = ({ isAdminLogin = false }) => {
         }
     };
 
-    // Vista de Login de Administrador (USANDO DIV EN LUGAR DE BODY)
+    // Vista de Login de Administrador (REPARADO: Usa <div> en lugar de <body>)
     if (isAdminLogin) {
         return (
             <div className="login-page"> 

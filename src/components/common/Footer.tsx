@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <footer className="main-footer">
             <div className="footer-grid">
@@ -18,14 +18,7 @@ const Footer = () => {
                         <li><Link to="/contacto">Contacto</Link></li>
                     </ul>
                 </div>
-                <div className="footer-social">
-                    <h4>SÍGUENOS</h4>
-                    <div className="social-icons">
-                        <a href="https://www.facebook.com/mundoauto" target="_blank"><i className="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/mundoauto" target="_blank"><i className="fab fa-instagram"></i></a>
-                        <a href="#" target="_blank"><i className="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
+
                 <div className="footer-payments">
                     <h4>MEDIOS DE PAGO</h4>
                     <img src="https://via.placeholder.com/200x120.png?text=QR+Red+compra" alt="Medios de Pago Redcompra" />

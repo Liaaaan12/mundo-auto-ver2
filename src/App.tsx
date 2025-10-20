@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-// RUTA REPARADA
-import { AppProvider, useAppContext } from './context/AppContext.jsx';
+import { AppProvider, useAppContext } from './context/AppContext.tsx'; // Importación local aún
 
-// Páginas de Cliente (Rutas verificadas)
-import LoginPage from './pages/client/LoginPage.jsx'; 
-import HomePage from './pages/client/HomePage.jsx';
-import CatalogPage from './pages/client/CatalogPage.jsx';
-import ContactPage from './pages/client/ContactPage.jsx';
-import PaymentPage from './pages/client/PaymentPage.jsx';
-import NosotrosPage from './pages/client/NosotrosPage.jsx';
-import BlogPage from './pages/client/BlogPage.jsx';
+// RUTAS REPARADAS con prefijo absoluto forzado (@/pages...)
+import LoginPage from './pages/client/LoginPage.tsx'; 
+import HomePage from './pages/client/HomePage.tsx';
+import CatalogPage from './pages/client/CatalogPage.tsx';
+import ContactPage from './pages/client/ContactPage.tsx';
+import PaymentPage from './pages/client/PaymentPage.tsx';
+import NosotrosPage from './pages/client/NosotrosPage.tsx';
+import BlogPage from './pages/client/BlogPage.tsx';
 
-// Páginas de Administración (Rutas verificadas)
-import AdminDashboard from './pages/admin/AdminDashboard.jsx';
-import ProductsPage from './pages/admin/ProductsPage.jsx'; 
-import OrdersPage from './pages/admin/OrdersPage.jsx';
-import UsersPage from './pages/admin/UsersPage.jsx';
-import RolesPage from './pages/admin/RolesPage.jsx';
-import ConfigPage from './pages/admin/ConfigPage.jsx';
+import AdminDashboard from './pages/admin/AdminDashboard.tsx';
+import ProductsPage from './pages/admin/ProductsPage.tsx'; 
+import OrdersPage from './pages/admin/OrdersPage.tsx';
+import UsersPage from './pages/admin/UsersPage.tsx';
+import RolesPage from './pages/admin/RolesPage.tsx';
+import ConfigPage from './pages/admin/ConfigPage.tsx';
 
 
-// Componente para proteger las rutas de administrador
-const AdminRoute = ({ children }) => {
+interface AdminRouteProps {
+    children: ReactNode;
+}
+
+const AdminRoute = ({ children }: AdminRouteProps) => {
     const { user } = useAppContext();
     if (!user || user.role !== 'admin') {
         return <Navigate to="/mi-cuenta/admin" replace />; 
@@ -30,7 +31,6 @@ const AdminRoute = ({ children }) => {
     return children;
 };
 
-// Rutas definitivas
 const AppRoutes = () => {
     return (
         <Routes>
@@ -60,7 +60,7 @@ const AppRoutes = () => {
     );
 };
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <Router>
             <AppProvider>

@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppContext } from '../../context/AppContext.jsx';
+import { useAppContext, CartItem } from '../../context/AppContext.tsx';
 
-// Componente CartModal
-const CartModal = ({ isOpen, onClose, cart, removeFromCart, cartTotal, cartItemCount }) => {
+interface CartModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    cart: CartItem[];
+    removeFromCart: (id: string) => void;
+    cartTotal: number;
+    cartItemCount: number;
+}
+
+const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cart, removeFromCart, cartTotal }) => {
     if (!isOpen) return null;
+    // ... (JSX del Modal) ...
     return (
         <div id="cart-modal" className="cart-modal" style={{ display: 'flex' }} onClick={onClose}>
             <div className="cart-content" onClick={(e) => e.stopPropagation()}>
@@ -27,7 +36,7 @@ const CartModal = ({ isOpen, onClose, cart, removeFromCart, cartTotal, cartItemC
     );
 };
 
-const Header = () => {
+const Header: React.FC = () => {
     const { cart, removeFromCart, cartTotal, cartItemCount, user, logout } = useAppContext();
     const [isCartOpen, setIsCartOpen] = useState(false);
     const navigate = useNavigate();
